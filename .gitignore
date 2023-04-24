@@ -1,0 +1,8 @@
+/.idea
+/.vscode
+/node_modules
+
+# The following directories/files are created on first run
+/data/*
+/errors/*
+.env
