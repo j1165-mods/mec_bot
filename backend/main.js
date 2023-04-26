@@ -205,7 +205,17 @@ setInterval(async () => {
         if (ping_avg < temp_avg * 0.5) client.channels.cache.get(uptime_channel).send(`The server's average ping has decreased from ${temp_avg} to ${ping_avg}ms (%${Math.round((temp_avg - ping_avg) / temp_avg * 100)}% decrease)`);
 
         if (status.players.online !== players_online) {
-            const player_list = status.players.sample.map(player => `> ${player.name}`).join(', ');
+
+            let player_list;
+
+            if (players_online !== 0) {
+                player_list = status.players.sample.map(player => `> ${player.name}`).join('\n');
+            }
+
+            if (players_online === 0) {
+                player_list = `> No players online`;
+            }
+
             client.channels.cache.get(uptime_channel).send(`The server's player count has changed from ${players_online} to ${status.players.online} (${status.players.max} max)\n\n${player_list}`);
             players_online = status.players.online;
             client.channels.cache.get(players_channel).setName(`PLAYERS: ${players_online}/${status.players.max}`);

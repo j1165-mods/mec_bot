@@ -24,6 +24,11 @@ module.exports = {
             return;
         }
 
+        if (status.players.online === 0) {
+            interaction.reply({content: "There are no players online!", ephemeral: true});
+            return;
+        }
+
         const
             players = status.players.sample, // This is an object
             embed = new EmbedBuilder()
